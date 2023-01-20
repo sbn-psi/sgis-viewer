@@ -1,32 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Canvas from './Canvas';
-import { useAppState, useAppStateDispatch } from '../AppStateContext';
 import { useAppCanvas } from '../CanvasContext';
 import { getMousePos } from '../getMousePos';
-import { AppState, Zone } from '../AppState';
+import { Zone } from '../AppState';
 import { Box } from '@mui/material';
-import {findWidth, intersectsZone, Point} from '../math' ;
-
+import {intersectsZone, Point, translatePoint} from '../math' ;
 import data from '../data.json';
 const { pois } = data as {pois: Point[]};
 
-export function Overview({sx}: {sx: any}) {
+export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
   const [loaded, setLoaded] = useState<boolean>(false);
   const img = useRef<HTMLImageElement>(null);
-  const state:AppState = useAppState();
-  const dispatchState = useAppStateDispatch();
   const canvas = useAppCanvas();
   let drawContext = canvas?.getContext('2d');
 
   // setup click handlers for canvas
   useEffect(() => {
     const clickHandler = (x: number, y: number) => {
-      for(let zone of state.zones) {
-        if (intersectsZone(zone, x, y, drawContext)) {
-          dispatchState({type: 'SELECTED_ZONE', zone })
-          return
-        }
-      }
+      // for(let zone of state.zones) {
+      //   if (intersectsZone(zone, x, y, drawContext)) {
+      //     dispatchState({type: 'SELECTED_ZONE', zone })
+      //     return
+      //   }
+      // }
     };
 
     if (!!canvas) {
@@ -64,54 +60,30 @@ export function Overview({sx}: {sx: any}) {
     // overview image
     drawContext.drawImage(img.current!, 0, 0);
 
-    // mapped zones
-    for(let zone of state.zones) {
-      drawZone(zone, drawContext);
-    }
-
-
     // points
+    let index = 0
     for(let poi of pois) {
-      drawPoi(poi, drawContext);
+      if(intersectsZone(zone, poi.x, poi.y, drawContext)) {
+        let point = translatePoint(poi, zone);
+        console.log(point)
+        drawPoi(point, drawContext, index);
+        index++;
+      }
     }
   }
 
 
   return <Box sx={sx}>
-    <img ref={img} src={state.overview!.url} style={{ display: 'none' }} crossOrigin="anonymous" />
-    {state.zones.map((zone: Zone) => <img id={zone.name} key={zone.name} src={zone.url} style={{ display: 'none' }} crossOrigin="anonymous" />)}
+    <img ref={img} src={zone.url} style={{ display: 'none' }} crossOrigin="anonymous" />
     <Canvas width={width} height={height} />
   </Box>;
-
-}
-function drawZone(zone: Zone, ctx: CanvasRenderingContext2D) {
-  if(!(zone.left && zone.top && zone.height)) return;
-
-  // calculate tilt
-  const angle = Math.atan2(zone.left.y - zone.top.y, zone.left.x - zone.top.x);
-
-  const height = zone.height
-  const width = findWidth(zone.top, zone.left);
-  
-  // set translate (relative origin) and rotation angle for the drawing context so that image has proper tilt
-  ctx.save();
-  ctx.translate(zone.top.x, zone.top.y);
-  ctx.rotate(angle);
-  ctx.drawImage((document.getElementById(zone.name) as HTMLImageElement)!, 0, 0, width, height);
-  // ctx.strokeStyle = "#43FF33";
-  // ctx.rect(0, 0, width, height);
-  // ctx.stroke();
-  
-  ctx.restore(); // resets to previous state
-  
 }
 
-
-function drawPoi(poi: any, context: CanvasRenderingContext2D) {
+function drawPoi(poi: any, context: CanvasRenderingContext2D, index: number) {
   context.beginPath();
   context.arc(poi.x, poi.y, 5, 0, 5 * Math.PI);
   context.strokeStyle = 'green';
   context.stroke();
-  context.fillStyle = 'lightgreen'
+  context.fillStyle = `rgba(0, ${50*index + 50}, 0)`;
   context.fill();
 }

@@ -25,5 +25,39 @@
 			"naturalHeight": 524,
 			"naturalWidth": 512
 		}
+	],
+	"pois": [
+		{
+			"x": 250,
+			"y": 250,
+			"data": {
+				"name": "1",
+				"description": "Fun fact"
+			}
+		},
+		{
+			"x": 225,
+			"y": 225,
+			"data": {
+				"name": "2",
+				"description": "Fun fact"
+			}
+		},
+		{
+			"x": 200,
+			"y": 250,
+			"data": {
+				"name": "3",
+				"description": "Fun fact"
+			}
+		},
+		{
+			"x": 225,
+			"y": 275,
+			"data": {
+				"name": "3",
+				"description": "Fun fact"
+			}
+		}
 	]
 }
