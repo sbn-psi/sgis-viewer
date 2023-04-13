@@ -1,4 +1,4 @@
-import { Zone } from "./AppState";
+import { POI, Zone } from "./AppState";
 
 export type Point = {x: number, y: number}
 
@@ -59,4 +59,13 @@ function intersectsZone(zone: Zone, x: number, y: number, ctx: CanvasRenderingCo
 
 }
 
-export {findWidth, intersectsZone, translatePoint}
+
+function intersectsPOI(poi: POI, x: number, y: number, zone: Zone) {
+  const translated = translatePoint({x: poi.x, y: poi.y}, zone);
+  const radius = 5
+
+  return Math.sqrt(Math.pow(translated.x - x, 2) + Math.pow(translated.y - y, 2)) < radius;
+
+}
+
+export {findWidth, intersectsZone, intersectsPOI, translatePoint}

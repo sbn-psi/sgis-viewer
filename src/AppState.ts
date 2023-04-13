@@ -2,6 +2,7 @@ export class AppState {
     readonly overview: Zone
     readonly zones: Zone[]
     readonly selectedZone: Zone | null = null
+    readonly selectedPOI: any
     constructor({ overview, zones }: { overview: Zone, zones: Zone[] }) {
         this.overview = overview
         this.zones = zones
@@ -26,5 +27,18 @@ export class Zone {
         this.height = json.height
         this.naturalHeight = json.naturalHeight
         this.naturalWidth = json.naturalWidth
+    }
+}
+
+export class POI {
+    name: string
+    x: number
+    y: number
+    data: any
+    constructor(json: any) {
+        this.name = json.name
+        this.x = json.x
+        this.y = json.y
+        this.data = json.data
     }
 }

@@ -2,27 +2,29 @@ import React, { useState, useEffect, useRef } from 'react';
 import Canvas from './Canvas';
 import { useAppCanvas } from '../CanvasContext';
 import { getMousePos } from '../getMousePos';
-import { Zone } from '../AppState';
-import { Box } from '@mui/material';
-import {intersectsZone, Point, translatePoint} from '../math' ;
+import { AppState, POI, Zone } from '../AppState';
+import { Box, Drawer } from '@mui/material';
+import {intersectsPOI, intersectsZone, Point, translatePoint} from '../math' ;
 import data from '../data.json';
-const { pois } = data as {pois: Point[]};
+import { useAppState, useAppStateDispatch } from '../AppStateContext';
+const { pois } = data as {pois: POI[]};
 
 export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
   const [loaded, setLoaded] = useState<boolean>(false);
   const img = useRef<HTMLImageElement>(null);
   const canvas = useAppCanvas();
   let drawContext = canvas?.getContext('2d');
+  const dispatchState = useAppStateDispatch()
 
   // setup click handlers for canvas
   useEffect(() => {
     const clickHandler = (x: number, y: number) => {
-      // for(let zone of state.zones) {
-      //   if (intersectsZone(zone, x, y, drawContext)) {
-      //     dispatchState({type: 'SELECTED_ZONE', zone })
-      //     return
-      //   }
-      // }
+      for(let poi of pois) {
+        if (intersectsPOI(poi, x, y, zone)) {
+          dispatchState({type: 'SELECTED_POI', poi })
+          return
+        }
+      }
     };
 
     if (!!canvas) {
@@ -61,13 +63,10 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
     drawContext.drawImage(img.current!, 0, 0);
 
     // points
-    let index = 0
     for(let poi of pois) {
       if(intersectsZone(zone, poi.x, poi.y, drawContext)) {
         let point = translatePoint(poi, zone);
-        console.log(point)
-        drawPoi(point, drawContext, index);
-        index++;
+        drawPoi(point, drawContext);
       }
     }
   }
@@ -76,14 +75,43 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
   return <Box sx={sx}>
     <img ref={img} src={zone.url} style={{ display: 'none' }} crossOrigin="anonymous" />
     <Canvas width={width} height={height} />
+    <Details />
   </Box>;
 }
 
-function drawPoi(poi: any, context: CanvasRenderingContext2D, index: number) {
+function Details() {
+  const state:AppState = useAppState()
+  const dispatchState = useAppStateDispatch()
+  const poi = state.selectedPOI
+
+  return <Drawer
+    anchor='right'
+    open={!!poi}
+    onClose={() => dispatchState({type: 'UNSELECTED_POI' })}
+  >
+    <DrawerContents poi={poi} />
+  </Drawer>
+}
+
+function DrawerContents({poi}: {poi: POI}) {
+  if(!poi) return null
+
+  return <div style={{minWidth: 300, padding: 10}}>
+    <h1>{poi.name}</h1>
+    {Object.entries(poi.data).map(([key, value]) => {
+      return <div key={key}>
+        <h3>{key}</h3>
+        <p>{value + ""}</p>
+      </div>
+    })}
+  </div>
+}
+
+function drawPoi(poi: any, context: CanvasRenderingContext2D) {
   context.beginPath();
   context.arc(poi.x, poi.y, 5, 0, 5 * Math.PI);
   context.strokeStyle = 'green';
   context.stroke();
-  context.fillStyle = `rgba(0, ${50*index + 50}, 0)`;
+  context.fillStyle = 'lightgreen'
   context.fill();
 }

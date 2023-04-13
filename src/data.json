@@ -28,34 +28,34 @@
 	],
 	"pois": [
 		{
+			"name": "1",
 			"x": 250,
 			"y": 250,
 			"data": {
-				"name": "1",
 				"description": "Fun fact"
 			}
 		},
 		{
+			"name": "2",
 			"x": 225,
 			"y": 225,
 			"data": {
-				"name": "2",
 				"description": "Fun fact"
 			}
 		},
 		{
+			"name": "3",
 			"x": 200,
 			"y": 250,
 			"data": {
-				"name": "3",
 				"description": "Fun fact"
 			}
 		},
 		{
+			"name": "3",
 			"x": 225,
 			"y": 275,
 			"data": {
-				"name": "3",
 				"description": "Fun fact"
 			}
 		}
