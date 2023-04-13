@@ -18,6 +18,7 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
 
   // setup click handlers for canvas
   useEffect(() => {
+    document.body.style.cursor = 'default';
     const clickHandler = (x: number, y: number) => {
       for(let poi of pois) {
         if (intersectsPOI(poi, x, y, zone)) {
@@ -35,9 +36,23 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
       };
       canvas.addEventListener('mousedown', clickListener);
 
+      // set up cursor pointer handling
+      const mouseMoveListener = (event: MouseEvent) => {
+        let pos = getMousePos(canvas, event);
+        for(let poi of pois) {
+          if (intersectsPOI(poi, pos.x, pos.y, zone)) {
+            document.body.style.cursor = 'pointer';
+            return
+          }
+        }
+        document.body.style.cursor = 'default';
+      };
+      canvas.addEventListener('mousemove', mouseMoveListener);
+
       return () => {
         //cleanup
         canvas?.removeEventListener('mousedown', clickListener);
+        canvas?.removeEventListener('mousemove', mouseMoveListener);
       };
     }
   }, [canvas]);
