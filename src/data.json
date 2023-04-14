@@ -7,56 +7,242 @@
 	},
 	"zones": [
 		{
+			"name": "4_1a BSE1.png",
+			"url": "http://localhost:8999/maps/public/368e06ad448a2f29952cd25a6b6f564d4_1a BSE1.png",
+			"top": {
+				"x": 442.9679199582935,
+				"y": 235.55812219676145
+			},
+			"left": {
+				"x": 487.4128662964237,
+				"y": 233.33587574094955
+			},
+			"bottom": {
+				"x": 486.70663675309606,
+				"y": 290.94457345963735
+			},
+			"height": 57.628641860909326,
+			"naturalHeight": 524,
+			"naturalWidth": 512
+		},
+		{
+			"name": "Ch19-Mg.png",
+			"url": "http://localhost:8999/maps/public/04995baa1ed4b4ba5dbee10dd5a95afdCh19-Mg.png",
+			"top": {
+				"x": 960.7515447975103,
+				"y": 430.0046870803022
+			},
+			"left": {
+				"x": 1011.8632330863601,
+				"y": 431.1158103082081
+			},
+			"bottom": {
+				"x": 1009.297829007125,
+				"y": 472.16229148099865
+			},
+			"height": 41.12657188191117,
+			"naturalHeight": 527,
+			"naturalWidth": 512
+		},
+		{
 			"name": "CH1-2-2BSE1.png",
 			"url": "http://localhost:8999/maps/public/b276e53c6e1c88586f921e42284f71f6CH1-2-2BSE1.png",
 			"top": {
-				"x": 119.5,
-				"y": 226.5
+				"x": 190.7428494894047,
+				"y": 563.3394744290159
 			},
 			"left": {
-				"x": 261,
-				"y": 142
+				"x": 259.6325163135065,
+				"y": 563.3394744290159
 			},
 			"bottom": {
-				"x": 351.5296292960918,
-				"y": 293.59695319996445
+				"x": 262.0314523554417,
+				"y": 643.3605627982363
 			},
-			"height": 176.5708073266926,
+			"height": 81.14243168266502,
 			"naturalHeight": 524,
 			"naturalWidth": 512
 		}
 	],
 	"pois": [
 		{
-			"name": "1",
-			"x": 250,
-			"y": 250,
+			"name": "POI 0 in 4_1a BSE1.png",
+			"x": 485.7191168584717,
+			"y": 277.47149504455047,
 			"data": {
-				"description": "Fun fact"
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
 			}
 		},
 		{
-			"name": "2",
-			"x": 225,
-			"y": 225,
+			"name": "POI 1 in 4_1a BSE1.png",
+			"x": 453.90197908645797,
+			"y": 277.8101019264859,
 			"data": {
-				"description": "Fun fact"
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
 			}
 		},
 		{
-			"name": "3",
-			"x": 200,
-			"y": 250,
+			"name": "POI 2 in 4_1a BSE1.png",
+			"x": 468.70007935307467,
+			"y": 270.17214540573093,
 			"data": {
-				"description": "Fun fact"
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
 			}
 		},
 		{
-			"name": "3",
-			"x": 225,
-			"y": 275,
+			"name": "POI 3 in 4_1a BSE1.png",
+			"x": 475.76375996745537,
+			"y": 279.2875591653247,
 			"data": {
-				"description": "Fun fact"
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 4 in 4_1a BSE1.png",
+			"x": 468.96747049688196,
+			"y": 250.1234026045314,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 0 in Ch19-Mg.png",
+			"x": 1009.2181517708716,
+			"y": 431.7576302651387,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 1 in Ch19-Mg.png",
+			"x": 982.706516648888,
+			"y": 448.94984244093337,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 2 in Ch19-Mg.png",
+			"x": 984.4076106350261,
+			"y": 435.66309870866957,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 3 in Ch19-Mg.png",
+			"x": 1003.8642967864779,
+			"y": 434.39541453804657,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 4 in Ch19-Mg.png",
+			"x": 1005.1146573601661,
+			"y": 450.8053076481402,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 0 in CH1-2-2BSE1.png",
+			"x": 195.597751470252,
+			"y": 585.8276955755433,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 1 in CH1-2-2BSE1.png",
+			"x": 228.61361837092832,
+			"y": 601.4052946395409,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 2 in CH1-2-2BSE1.png",
+			"x": 211.6981431081288,
+			"y": 582.0739456544266,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 3 in CH1-2-2BSE1.png",
+			"x": 207.08365480771994,
+			"y": 617.9637608611201,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
+			}
+		},
+		{
+			"name": "POI 4 in CH1-2-2BSE1.png",
+			"x": 190.76904316189103,
+			"y": 635.4315802391944,
+			"data": {
+				"Atomic Percent": 42,
+				"Atomic Percent Error": 0.1,
+				"Fe Abundance": 0.1,
+				"Zn Abundance": 0.2,
+				"Mg Abundance": 0.3
 			}
 		}
 	]

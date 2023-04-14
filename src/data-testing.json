@@ -1,0 +1,63 @@
+{
+	"overview": {
+		"name": "Overview Collections .jpg",
+		"url": "http://localhost:8999/maps/public/1259e4e11cb84139395db5c5dd8fb784Overview Collections .jpg",
+		"naturalHeight": 705,
+		"naturalWidth": 1024
+	},
+	"zones": [
+		{
+			"name": "CH1-2-2BSE1.png",
+			"url": "http://localhost:8999/maps/public/b276e53c6e1c88586f921e42284f71f6CH1-2-2BSE1.png",
+			"top": {
+				"x": 119.5,
+				"y": 226.5
+			},
+			"left": {
+				"x": 261,
+				"y": 142
+			},
+			"bottom": {
+				"x": 351.5296292960918,
+				"y": 293.59695319996445
+			},
+			"height": 176.5708073266926,
+			"naturalHeight": 524,
+			"naturalWidth": 512
+		}
+	],
+	"pois": [
+		{
+			"name": "1",
+			"x": 250,
+			"y": 250,
+			"data": {
+				"Atomic Percent": 42
+			}
+		},
+		{
+			"name": "2",
+			"x": 225,
+			"y": 225,
+			"data": {
+				"Atomic Percent": 42
+			}
+		},
+		{
+			"name": "3",
+			"x": 200,
+			"y": 250,
+			"data": {
+				"Atomic Percent": 42
+			}
+		},
+		{
+			"name": "3",
+			"x": 225,
+			"y": 275,
+			"data": {
+				"Atomic Percent": 42
+			}
+		}
+	]
+}
