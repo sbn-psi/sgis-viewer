@@ -3,6 +3,7 @@ export class AppState {
     readonly zones: Zone[]
     readonly selectedZone: Zone | null = null
     readonly selectedPOI: any
+    readonly zoomLevel: number = 1
     constructor({ overview, zones }: { overview: Zone, zones: Zone[] }) {
         this.overview = overview
         this.zones = zones

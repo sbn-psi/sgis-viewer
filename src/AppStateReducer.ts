@@ -4,7 +4,8 @@ type Action =
     { type: 'SELECTED_ZONE', zone: Zone } |
     { type: 'SELECTED_POI', poi: POI } |
     { type: 'UNSELECTED_ZONE' } | 
-    { type: 'UNSELECTED_POI' } 
+    { type: 'UNSELECTED_POI' } |
+    { type: 'ZOOM', level: number }
 
 export const stateReducer = (state: AppState, action: Action) => {
     switch (action.type) {
@@ -29,6 +30,12 @@ export const stateReducer = (state: AppState, action: Action) => {
             return {
                 ...state,
                 selectedPOI: null
+            };
+        case "ZOOM":
+
+            return {
+                ...state,
+                zoomLevel: Math.max(0.1, action.level)
             };
     }
 };

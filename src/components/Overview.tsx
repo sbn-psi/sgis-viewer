@@ -5,15 +5,15 @@ import { useAppCanvas } from '../CanvasContext';
 import { getMousePos } from '../getMousePos';
 import { AppState, Zone } from '../AppState';
 import { Box } from '@mui/material';
-import {findWidth, intersectsZone, Point} from '../math' ;
+import { findWidth, intersectsZone, Point } from '../math';
 
 import data from '../data.json';
-const { pois } = data as {pois: Point[]};
+const { pois } = data as { pois: Point[] };
 
-export function Overview({sx}: {sx: any}) {
+export function Overview({ sx }: { sx: any }) {
   const [loaded, setLoaded] = useState<boolean>(false);
   const img = useRef<HTMLImageElement>(null);
-  const state:AppState = useAppState();
+  const state: AppState = useAppState();
   const dispatchState = useAppStateDispatch();
   const canvas = useAppCanvas();
   let drawContext = canvas?.getContext('2d');
@@ -23,9 +23,9 @@ export function Overview({sx}: {sx: any}) {
     document.body.style.cursor = 'default';
 
     const clickHandler = (x: number, y: number) => {
-      for(let zone of state.zones) {
+      for (let zone of state.zones) {
         if (intersectsZone(zone, x, y, drawContext)) {
-          dispatchState({type: 'SELECTED_ZONE', zone })
+          dispatchState({ type: 'SELECTED_ZONE', zone })
           return
         }
       }
@@ -42,7 +42,7 @@ export function Overview({sx}: {sx: any}) {
       // set up cursor pointer handling
       const mouseMoveListener = (event: MouseEvent) => {
         let pos = getMousePos(canvas, event);
-        for(let zone of state.zones) {
+        for (let zone of state.zones) {
           if (intersectsZone(zone, pos.x, pos.y, drawContext)) {
             document.body.style.cursor = 'pointer';
             return
@@ -58,7 +58,7 @@ export function Overview({sx}: {sx: any}) {
         canvas?.removeEventListener('mousemove', mouseMoveListener);
       };
     }
-  }, [canvas]);
+  }, [canvas, state.zoomLevel]);
 
   // setup image load listener so we rerender when it happens
   useEffect(() => {
@@ -77,38 +77,44 @@ export function Overview({sx}: {sx: any}) {
 
   // draw the current state
   if (loaded && drawContext) {
-    // overview image
-    drawContext.drawImage(img.current!, 0, 0);
-
-    // mapped zones
-    for(let zone of state.zones) {
-      drawZone(zone, drawContext);
-    }
-
-
-    // points
-    for(let poi of pois) {
-      drawPoi(poi, drawContext);
-    }
+    redraw(drawContext, { state, img });
   }
 
 
   return <Box sx={sx}>
     <img ref={img} src={state.overview!.url} style={{ display: 'none' }} crossOrigin="anonymous" />
     {state.zones.map((zone: Zone) => <img id={zone.name} key={zone.name} src={zone.url} style={{ display: 'none' }} crossOrigin="anonymous" />)}
-    <Canvas width={width} height={height} />
+    <Canvas width={width} height={height} redraw={redraw} redrawProps={{state, img}}/>
   </Box>;
 
 }
+
+function redraw(drawContext: CanvasRenderingContext2D, props: any) {
+  const { state, img } = props;
+
+  // overview image
+  drawContext.drawImage(img.current!, 0, 0);
+
+  // mapped zones
+  for (let zone of state.zones) {
+    drawZone(zone, drawContext);
+  }
+
+  // points
+  for (let poi of pois) {
+    drawPoi(poi, drawContext);
+  }
+}
+
 function drawZone(zone: Zone, ctx: CanvasRenderingContext2D) {
-  if(!(zone.left && zone.top && zone.height)) return;
+  if (!(zone.left && zone.top && zone.height)) return;
 
   // calculate tilt
   const angle = Math.atan2(zone.left.y - zone.top.y, zone.left.x - zone.top.x);
 
   const height = zone.height
   const width = findWidth(zone.top, zone.left);
-  
+
   // set translate (relative origin) and rotation angle for the drawing context so that image has proper tilt
   ctx.save();
   ctx.translate(zone.top.x, zone.top.y);
