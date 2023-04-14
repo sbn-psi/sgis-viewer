@@ -124,8 +124,11 @@ function DrawerContents({poi}: {poi: POI}) {
 
 function drawPoi(poi: any, context: CanvasRenderingContext2D) {
   context.beginPath();
-  context.arc(poi.x, poi.y, 5, 0, 5 * Math.PI);
-  context.strokeStyle = 'green';
+  context.arc(poi.x, poi.y, 5, 0, 2 * Math.PI);
+  context.strokeStyle = 'black';
+  context.stroke();
+  context.arc(poi.x, poi.y, 4, 0, 4 * Math.PI);
+  context.strokeStyle = 'white';
   context.stroke();
   context.fillStyle = 'lightgreen'
   context.fill();

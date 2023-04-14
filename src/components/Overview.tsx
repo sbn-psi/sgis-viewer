@@ -114,19 +114,22 @@ function drawZone(zone: Zone, ctx: CanvasRenderingContext2D) {
   ctx.translate(zone.top.x, zone.top.y);
   ctx.rotate(angle);
   ctx.drawImage((document.getElementById(zone.name) as HTMLImageElement)!, 0, 0, width, height);
-  // ctx.strokeStyle = "#43FF33";
-  // ctx.rect(0, 0, width, height);
-  // ctx.stroke();
-  
+  ctx.strokeStyle = "#43FF33";
+  ctx.rect(0, 0, width, height);
+  ctx.stroke();
+
   ctx.restore(); // resets to previous state
-  
+
 }
 
 
 function drawPoi(poi: any, context: CanvasRenderingContext2D) {
   context.beginPath();
-  context.arc(poi.x, poi.y, 5, 0, 5 * Math.PI);
-  context.strokeStyle = 'green';
+  context.arc(poi.x, poi.y, 3, 0, 3 * Math.PI);
+  context.strokeStyle = 'black';
+  context.stroke();
+  context.arc(poi.x, poi.y, 2, 0, 2 * Math.PI);
+  context.strokeStyle = 'white';
   context.stroke();
   context.fillStyle = 'lightgreen'
   context.fill();
