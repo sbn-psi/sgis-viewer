@@ -46,6 +46,7 @@ function intersectsZone(zone: Zone, x: number, y: number, ctx: CanvasRenderingCo
 
   // set translate (relative origin) and rotation angle for the drawing context so that image has proper tilt
   ctx.save();
+  ctx.beginPath();
   ctx.translate(zone.top.x, zone.top.y);
   ctx.rotate(angle);
   ctx.rect(0, 0, width, height);
@@ -53,10 +54,8 @@ function intersectsZone(zone: Zone, x: number, y: number, ctx: CanvasRenderingCo
 
   const result = ctx.isPointInPath(x*pixelRatio, y*pixelRatio);
   
-  
   ctx.restore(); // resets to previous state
   return result;
-
 }
 
 

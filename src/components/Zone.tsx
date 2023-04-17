@@ -72,7 +72,6 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
         zonePois.push(poi)
       }
     }
-    console.log('setting our pois')
     setOurPois(zonePois)
 
     return function cleanup() {

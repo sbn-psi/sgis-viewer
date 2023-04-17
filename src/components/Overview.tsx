@@ -31,6 +31,16 @@ export function Overview({ sx }: { sx: any }) {
       }
     };
 
+    const mouseMoveHandler = (x: number, y: number) => {
+      for (let zone of state.zones) {
+        if (intersectsZone(zone, x, y, drawContext)) {
+          document.body.style.cursor = 'pointer';
+          return
+        }
+      }
+      document.body.style.cursor = 'default';
+    };
+
     if (!!canvas) {
       // set up click handling
       const clickListener = (event: MouseEvent) => {
@@ -42,13 +52,7 @@ export function Overview({ sx }: { sx: any }) {
       // set up cursor pointer handling
       const mouseMoveListener = (event: MouseEvent) => {
         let pos = getMousePos(canvas, event);
-        for (let zone of state.zones) {
-          if (intersectsZone(zone, pos.x, pos.y, drawContext)) {
-            document.body.style.cursor = 'pointer';
-            return
-          }
-        }
-        document.body.style.cursor = 'default';
+        mouseMoveHandler(pos.x, pos.y);
       };
       canvas.addEventListener('mousemove', mouseMoveListener);
 
