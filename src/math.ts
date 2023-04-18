@@ -42,17 +42,16 @@ function intersectsZone(zone: Zone, x: number, y: number, ctx: CanvasRenderingCo
   const height = zone.height
   const width = findWidth(zone.top, zone.left);
 
-  const pixelRatio = window.devicePixelRatio || 1;
-
   // set translate (relative origin) and rotation angle for the drawing context so that image has proper tilt
   ctx.save();
   ctx.beginPath();
   ctx.translate(zone.top.x, zone.top.y);
   ctx.rotate(angle);
   ctx.rect(0, 0, width, height);
-  // apply the inverse of the current transform to x and y to get the point in the original coordinate space
-
-  const result = ctx.isPointInPath(x*pixelRatio, y*pixelRatio);
+  
+  // apply canvas scale to x and y
+  const zoom = ctx.getTransform().a;
+  const result = ctx.isPointInPath(x * zoom, y * zoom);
   
   ctx.restore(); // resets to previous state
   return result;
