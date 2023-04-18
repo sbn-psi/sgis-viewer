@@ -22,7 +22,7 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
   useEffect(() => {
     document.body.style.cursor = 'default';
     const clickHandler = (x: number, y: number) => {
-      for(let poi of pois) {
+      for(let poi of ourPois) {
         if (intersectsPOI(poi, x, y, zone)) {
           dispatchState({type: 'SELECTED_POI', poi })
           return
@@ -57,7 +57,7 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
         canvas?.removeEventListener('mousemove', mouseMoveListener);
       };
     }
-  }, [canvas]);
+  }, [canvas, zone]);
 
   useEffect(() => {
     // setup image load listener so we rerender when it happens
@@ -77,7 +77,7 @@ export function ZoneCanvas({zone, sx}: {zone: Zone, sx: any}) {
     return function cleanup() {
       img.current?.removeEventListener('load', listener);
     };
-  }, []);
+  }, [zone]);
 
   const width = img.current?.naturalWidth || 1000;
   const height = img.current?.naturalHeight || 1000;

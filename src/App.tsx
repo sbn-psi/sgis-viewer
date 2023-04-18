@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import './App.css';
-import {AppBar, Box, Toolbar, Typography} from '@mui/material';
+import {Box, IconButton, styled, Toolbar, Typography} from '@mui/material';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { AppStateProvider, useAppState } from './AppStateContext';
 import { AppCanvasProvider } from './CanvasContext';
 import { Overview } from './components/Overview';
 import { ZoneCanvas } from './components/Zone';
 import Controls from './components/Controls';
+import LayerNavigator from './components/Layers';
+import { Menu } from '@mui/icons-material';
 
 function App() {
 
@@ -20,12 +23,28 @@ function App() {
 
 export default App;
 
+const drawerWidth = 240;
+
 function Main() {
   const state = useAppState()
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(!open);
+  };
 
   return <Box component="main" sx={{ bgcolor: 'background.default'}}>
-    <AppBar position='sticky'>
+    <AppBar position='sticky' open={open} >
       <Toolbar>
+        <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
+            <Menu />
+          </IconButton>
         <Typography
             variant="h6"
             noWrap
@@ -45,6 +64,7 @@ function Main() {
           </Typography>
       </Toolbar>
     </AppBar>
+    <LayerNavigator open={open} close={() => setOpen(false)}/>
     { state.selectedZone 
       ? <ZoneCanvas zone={state.selectedZone} sx={{height: '100%', width: '100%', overflow: 'auto'}}/>
       : <Overview sx={{height: '100%', width: '100%', overflow: 'auto'}}/>
@@ -52,3 +72,24 @@ function Main() {
     <Controls/>
   </Box>
 }
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
