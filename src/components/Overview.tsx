@@ -123,9 +123,30 @@ function drawZone(zone: Zone, ctx: CanvasRenderingContext2D) {
   ctx.save();
   ctx.translate(zone.top.x, zone.top.y);
   ctx.rotate(angle);
-  ctx.drawImage((document.getElementById(zone.name) as HTMLImageElement)!, 0, 0, width, height);
-  ctx.strokeStyle = "#43FF33";
-  ctx.rect(0, 0, width, height);
+  // ctx.drawImage((document.getElementById(zone.name) as HTMLImageElement)!, 0, 0, width, height);
+  ctx.strokeStyle = "#1976d2";
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetX = 5;
+  ctx.shadowOffsetY = 5;
+  // ctx.rect(0, 0, width, height);
+  const x = 0;
+  const y = 0;
+  const cornerRadius = 3;
+  ctx.beginPath();
+  ctx.moveTo(x + cornerRadius, y);
+  ctx.lineTo(x + width - cornerRadius, y);
+  ctx.arcTo(x + width, y, x + width, y + cornerRadius, cornerRadius);
+  ctx.lineTo(x + width, y + height - cornerRadius);
+  ctx.arcTo(x + width, y + height, x + width - cornerRadius, y + height, cornerRadius);
+  ctx.lineTo(x + cornerRadius, y + height);
+  ctx.arcTo(x, y + height, x, y + height - cornerRadius, cornerRadius);
+  ctx.lineTo(x, y + cornerRadius);
+  ctx.arcTo(x, y, x + cornerRadius, y, cornerRadius);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(25, 118, 210, 0.2)';
+  ctx.fill();
   ctx.stroke();
 
   ctx.restore(); // resets to previous state
@@ -133,14 +154,19 @@ function drawZone(zone: Zone, ctx: CanvasRenderingContext2D) {
 }
 
 
-function drawPoi(poi: any, context: CanvasRenderingContext2D) {
-  context.beginPath();
-  context.arc(poi.x, poi.y, 3, 0, 3 * Math.PI);
-  context.strokeStyle = 'black';
-  context.stroke();
-  context.arc(poi.x, poi.y, 2, 0, 2 * Math.PI);
-  context.strokeStyle = 'white';
-  context.stroke();
-  context.fillStyle = 'lightgreen'
-  context.fill();
+function drawPoi(poi: any, ctx: CanvasRenderingContext2D) {
+  const pointerX = poi.x;
+  const pointerY = poi.y;
+  const triangleSize = 10;
+
+  // Draw the triangle pointer
+  ctx.beginPath();
+  ctx.moveTo(pointerX, pointerY);
+  ctx.lineTo(pointerX - triangleSize / 2, pointerY - triangleSize );
+  ctx.lineTo(pointerX + triangleSize / 2, pointerY - triangleSize );
+  ctx.closePath();
+  ctx.strokeStyle = 'black';
+  ctx.stroke();
+  ctx.fillStyle = 'lightgreen';
+  ctx.fill();
 }

@@ -135,16 +135,19 @@ function DrawerContents({poi}: {poi: POI}) {
   </div>
 }
 
-function drawPoi(poi: any, context: CanvasRenderingContext2D) {
-  // console.log('drawPoi', poi)
+function drawPoi(poi: any, ctx: CanvasRenderingContext2D) {
+  const pointerX = poi.x;
+  const pointerY = poi.y;
+  const triangleSize = 15;
 
-  context.beginPath();
-  context.arc(poi.x, poi.y, 5, 0, 2 * Math.PI);
-  context.strokeStyle = 'black';
-  context.stroke();
-  context.arc(poi.x, poi.y, 4, 0, 4 * Math.PI);
-  context.strokeStyle = 'white';
-  context.stroke();
-  context.fillStyle = 'lightgreen'
-  context.fill();
+  // Draw the triangle pointer
+  ctx.beginPath();
+  ctx.moveTo(pointerX, pointerY);
+  ctx.lineTo(pointerX - triangleSize / 2, pointerY - triangleSize );
+  ctx.lineTo(pointerX + triangleSize / 2, pointerY - triangleSize );
+  ctx.closePath();
+  ctx.strokeStyle = 'black';
+  ctx.stroke();
+  ctx.fillStyle = 'lightgreen';
+  ctx.fill();
 }

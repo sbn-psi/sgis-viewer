@@ -61,9 +61,10 @@ function intersectsZone(zone: Zone, x: number, y: number, ctx: CanvasRenderingCo
 
 function intersectsPOI(poi: POI, x: number, y: number, zone: Zone) {
   const translated = translatePoint({x: poi.x, y: poi.y}, zone);
-  const radius = 5
+  const pointerSize = 15;
 
-  return Math.sqrt(Math.pow(translated.x - x, 2) + Math.pow(translated.y - y, 2)) < radius;
+  return x > translated.x - pointerSize / 2 && x < translated.x + pointerSize / 2 && y > translated.y - pointerSize && y < translated.y;
+
 
 }
 
