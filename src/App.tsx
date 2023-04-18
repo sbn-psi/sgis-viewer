@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Box, IconButton, styled, Toolbar, Typography} from '@mui/material';
+import {Box, IconButton, styled, SxProps, Theme, Toolbar, Typography} from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { AppStateProvider, useAppState } from './AppStateContext';
 import { AppCanvasProvider } from './CanvasContext';
@@ -33,7 +33,7 @@ function Main() {
     setOpen(!open);
   };
 
-  return <Box component="main" sx={{ bgcolor: 'background.default'}}>
+  return <Box component="main" sx={bg}>
     <AppBar position='sticky' open={open} >
       <Toolbar>
         <IconButton
@@ -93,3 +93,26 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+const bg: SxProps<Theme> = {
+  bgcolor: 'background.default',
+  height: '100vh',
+  width: '100vw',
+  overflow: 'auto',
+  background: 
+    `repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent 30px,
+      white 30px,
+      white 33px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 30px,
+      white 30px,
+      white 33px
+    ),
+    linear-gradient(135deg, #ddddff, #bbbbd6)`
+}
